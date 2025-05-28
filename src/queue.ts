@@ -108,7 +108,6 @@ export class Queue<T> extends EventEmitter {
 
   constructor(private readonly config: QueueConfig<T>) {
     super();
-    const { maxConcurrent, priorityConfig } = config;
 
     this.circuitBreaker = new CircuitBreaker(5, 30000, config.logger);
 
@@ -143,7 +142,7 @@ export class Queue<T> extends EventEmitter {
   }
 
   async processNext(
-    processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
+    _processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
   ): Promise<void> {
     if (this.paused) return;
 
@@ -205,7 +204,7 @@ export class Queue<T> extends EventEmitter {
 
   private async handleFailure(
     item: QueueItem<T>,
-    processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
+    _processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
   ) {
     item.metadata.attempts++;
     item.metadata.status = 'failed';
@@ -228,7 +227,7 @@ export class Queue<T> extends EventEmitter {
   private async handleError(
     item: QueueItem<T>,
     err: Error,
-    processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
+    _processor: (item: QueueItem<T>) => Promise<{ success: boolean }>
   ) {
     item.metadata.error = err.message;
     this.stats.totalErrors++;
@@ -238,7 +237,7 @@ export class Queue<T> extends EventEmitter {
       attempt: item.metadata.attempts
     });
 
-    await this.handleFailure(item, processor);
+    await this.handleFailure(item, _processor);
   }
 
   private async handleTimeout(id: string) {

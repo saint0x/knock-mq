@@ -2,7 +2,7 @@ import type {
   QueueItem,
   QueuePriority,
   QueueStatus
-} from './queue';
+} from './queue.js';
 
 export interface ExtendedQueueStorage<T = unknown> {
   enqueue(item: QueueItem<T>): Promise<void>;
@@ -52,7 +52,7 @@ export class InMemoryStorage<T = unknown> implements ExtendedQueueStorage<T> {
     if (item) item.metadata.status = status;
   }
 
-  async complete(id: string, success: boolean): Promise<void> {
+  async complete(id: string, _success: boolean): Promise<void> {
     const item = this.items.get(id);
     if (item) item.metadata.status = 'delivered';
   }

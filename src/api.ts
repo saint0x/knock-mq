@@ -1,6 +1,6 @@
-import { Queue } from './queue';
-import type { QueueConfig, QueueItem, QueueStatus, QueuePriority } from './queue';
-import type { ExtendedQueueStorage } from './storage';
+import { Queue } from './queue.js';
+import type { QueueConfig, QueueItem, QueueStatus, QueuePriority } from './queue.js';
+import type { ExtendedQueueStorage } from './storage.js';
 
 export class QueueInstance<T = unknown> {
   private queue: Queue<T>;

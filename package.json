@@ -1,23 +1,72 @@
 {
-  "name": "knock-mq",
-  "module": "index.ts",
+  "name": "knock",
+  "version": "0.0.1",
+  "description": "Production-grade message queue implementation.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "type": "module",
-  "private": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./queue": {
+      "import": "./dist/queue.js",
+      "types": "./dist/queue.d.ts"
+    },
+    "./storage": {
+      "import": "./dist/storage.js",
+      "types": "./dist/storage.d.ts"
+    },
+    "./api": {
+      "import": "./dist/api.js",
+      "types": "./dist/api.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "storage.examples.md"
+  ],
   "scripts": {
-    "dev": "bun run script.ts",
-    "stress-test": "bun run script.ts",
-    "realistic-test": "bun run tests/server.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "bun run tests/server.ts",
     "type-check": "tsc --noEmit"
   },
+  "keywords": [
+    "message-queue",
+    "queue",
+    "job-queue",
+    "typescript",
+    "production",
+    "distributed-systems",
+    "performance",
+    "circuit-breaker",
+    "retry",
+    "dead-letter-queue"
+  ],
+  "author": "saint0x",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saint0x/knock-mq.git"
+  },
+  "homepage": "https://github.com/saint0x/knock-mq",
+  "bugs": {
+    "url": "https://github.com/saint0x/knock-mq/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "knock-mq": ".",
+    "@types/bun": "latest",
+    "typescript": "^5.0.0",
     "hono": "^3.12.0",
     "@hono/node-server": "^1.8.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }
