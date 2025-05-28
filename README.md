@@ -20,27 +20,30 @@ npm install knock
 ## Quick Start
 
 ```typescript
-import { QueueInstance } from 'knock';
+import { QueueInstance, Storage } from 'knock-mq';
 
 // Create a queue instance
-const queue = new QueueInstance();
-
-// Define a job processor
-queue.process('email', async (job) => {
-  console.log('Processing email:', job.data);
-  // Your email processing logic here
-  return { sent: true };
+const queue = new QueueInstance({
+  name: 'my-queue',
+  storage: new Storage(),
+  maxRetries: 3,
+  maxConcurrent: 5,
+  logger: console
 });
 
-// Add jobs to the queue
-await queue.add('email', {
-  to: 'user@example.com',
-  subject: 'Welcome!',
-  body: 'Thanks for signing up!'
+// Add a job processor
+queue.useProcessor(async (job) => {
+  console.log('Processing job:', job.data);
+  // Your job processing logic here
+  return { success: true };
 });
 
 // Start processing
 queue.start();
+
+// Add jobs to the queue
+await queue.enqueue({ message: 'Hello, World!' });
+await queue.enqueue({ urgent: true }, { priority: 'high' });
 ```
 
 ## API Reference
@@ -89,9 +92,9 @@ const queue = new Queue(storage, {
 Extensible storage interface with in-memory implementation included.
 
 ```typescript
-import { InMemoryStorage } from 'knock';
+import { Storage } from 'knock-mq';
 
-const storage = new InMemoryStorage();
+const storage = new Storage();
 ```
 
 For other storage backends (PostgreSQL, Redis, etc.), see `storage.examples.md`.
@@ -159,3 +162,29 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please see the [GitHub repository](https://github.com/saint0x/knock-mq) for more information.
+
+## Advanced Usage
+
+### Custom Storage Backend
+
+```typescript
+import { QueueInstance, Storage } from 'knock-mq';
+
+// Use the built-in in-memory storage
+const storage = new Storage();
+
+// Or implement your own storage (PostgreSQL, Redis, etc.)
+class CustomStorage implements ExtendedQueueStorage {
+  // Implement the storage interface
+}
+
+const queue = new QueueInstance({
+  name: 'production-queue',
+  storage: new CustomStorage(),
+  maxRetries: 5,
+  backoffBaseMs: 2000,
+  maxConcurrent: 20,
+  timeoutMs: 60000,
+  logger: yourLogger
+});
+```

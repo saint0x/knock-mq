@@ -1,6 +1,6 @@
 {
   "name": "knock-mq",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Production-grade message queue implementation.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -68,5 +68,8 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "knock-mq": "^0.0.1"
   }
 }

@@ -4,15 +4,16 @@
     "": {
       "name": "knock-mq",
       "dependencies": {
-        "@hono/node-server": "^1.8.0",
-        "hono": "^3.12.0",
-        "knock-mq": ".",
+        "knock-mq": "^0.0.1",
       },
       "devDependencies": {
+        "@hono/node-server": "^1.8.0",
         "@types/bun": "latest",
+        "hono": "^3.12.0",
+        "typescript": "^5.0.0",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": "^5.0.0",
       },
     },
   },
@@ -27,7 +28,7 @@
 
     "hono": ["hono@3.12.12", "", {}, "sha512-5IAMJOXfpA5nT+K0MNjClchzz0IhBHs2Szl7WFAhrFOsbtQsYmNynFyJRg/a3IPsmCfxcrf8txUGiNShXpK5Rg=="],
 
-    "knock-mq": ["knock-mq@file:", { "devDependencies": { "@types/bun": "latest" }, "peerDependencies": { "typescript": "^5" } }],
+    "knock-mq": ["knock-mq@0.0.1", "", { "peerDependencies": { "typescript": "^5.0.0" } }, "sha512-3w1PPnvwSTFRQ6kMYNehwOo39CxeLgEoeOwHyePm1fZSbZY0sOM+JnaNoaABJ1wIgDmQ5RUS9tH7UzrHQTETNg=="],
 
     "typescript": ["typescript@5.8.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ=="],
 

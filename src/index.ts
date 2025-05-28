@@ -9,7 +9,7 @@ export type {
   Monitoring
 } from './queue.js';
 
-export { InMemoryStorage } from './storage.js';
+export { InMemoryStorage, InMemoryStorage as Storage } from './storage.js';
 export type { 
   ExtendedQueueStorage 
 } from './storage.js';
