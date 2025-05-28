@@ -14,7 +14,7 @@ A production-grade message queue implementation.
 ## Installation
 
 ```bash
-npm install knock
+npm install knock-mq
 ```
 
 ## Quick Start
