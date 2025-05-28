@@ -20,10 +20,10 @@ npm install knock
 ## Quick Start
 
 ```typescript
-import { QueueInstance, Storage } from 'knock-mq';
+import { Queue, Storage } from 'knock-mq';
 
 // Create a queue instance
-const queue = new QueueInstance({
+const queue = new Queue({
   name: 'my-queue',
   storage: new Storage(),
   maxRetries: 3,
@@ -48,14 +48,14 @@ await queue.enqueue({ urgent: true }, { priority: 'high' });
 
 ## API Reference
 
-### QueueInstance
+### Queue
 
 The main interface for interacting with the queue.
 
 ```typescript
-import { QueueInstance } from 'knock';
+import { Queue } from 'knock-mq';
 
-const queue = new QueueInstance({
+const queue = new Queue({
   concurrency: 10,        // Number of concurrent jobs
   retryAttempts: 3,       // Retry failed jobs
   retryDelay: 1000,       // Delay between retries (ms)
@@ -168,7 +168,7 @@ Contributions are welcome! Please see the [GitHub repository](https://github.com
 ### Custom Storage Backend
 
 ```typescript
-import { QueueInstance, Storage } from 'knock-mq';
+import { Queue, Storage } from 'knock-mq';
 
 // Use the built-in in-memory storage
 const storage = new Storage();
@@ -178,7 +178,7 @@ class CustomStorage implements ExtendedQueueStorage {
   // Implement the storage interface
 }
 
-const queue = new QueueInstance({
+const queue = new Queue({
   name: 'production-queue',
   storage: new CustomStorage(),
   maxRetries: 5,

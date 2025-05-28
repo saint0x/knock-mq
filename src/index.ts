@@ -1,5 +1,5 @@
 // Main exports for the knock message queue package
-export { Queue } from './queue.js';
+export { Queue as CoreQueue } from './queue.js';
 export type { 
   QueueItem, 
   QueuePriority, 
@@ -14,7 +14,7 @@ export type {
   ExtendedQueueStorage 
 } from './storage.js';
 
-export { QueueInstance } from './api.js';
+export { QueueInstance, QueueInstance as Queue } from './api.js';
 
 // Re-export everything for convenience
 export * from './queue.js';

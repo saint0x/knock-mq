@@ -1,4 +1,4 @@
-import { QueueInstance, Storage } from 'knock-mq';
+import { Queue, Storage } from 'knock-mq';
 
 // Production-like logger
 const logger = {
@@ -20,7 +20,7 @@ const queueConfig = {
 };
 
 // Initialize queue instance
-const queue = new QueueInstance(queueConfig);
+const queue = new Queue(queueConfig);
 
 // Job processors with realistic work simulation
 queue.useProcessor(async (job) => {
