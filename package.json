@@ -1,0 +1,23 @@
+{
+  "name": "knock-mq",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run script.ts",
+    "stress-test": "bun run script.ts",
+    "realistic-test": "bun run tests/server.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "knock-mq": ".",
+    "hono": "^3.12.0",
+    "@hono/node-server": "^1.8.0"
+  }
+}
